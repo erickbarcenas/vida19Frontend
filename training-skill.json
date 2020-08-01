@@ -1,0 +1,285 @@
+{
+  "intents": [
+    {
+      "intent": "High_school_education",
+      "examples": [
+        {
+          "text": "Educación media superior"
+        },
+        {
+          "text": "superior"
+        },
+        {
+          "text": "media superior"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "si",
+      "examples": [
+        {
+          "text": "si"
+        },
+        {
+          "text": "sí"
+        }
+      ],
+      "description": "Knowing the person's attitude"
+    },
+    {
+      "intent": "no",
+      "examples": [
+        {
+          "text": "no"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "work",
+      "examples": [
+        {
+          "text": "empleo"
+        },
+        {
+          "text": "busco trabajo"
+        },
+        {
+          "text": "trabajo"
+        }
+      ],
+      "description": "Help the person to create a CV"
+    },
+    {
+      "intent": "welcome",
+      "examples": [
+        {
+          "text": "Que onda"
+        },
+        {
+          "text": "aloha"
+        },
+        {
+          "text": "buenas tardes"
+        },
+        {
+          "text": "buenos días"
+        },
+        {
+          "text": "buenas noches"
+        },
+        {
+          "text": "Hey"
+        },
+        {
+          "text": "Hola"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "bienvenida",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://vida19back.mybluemix.net/list",
+      "name": "main_webhook",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic MDZlZTgzNGQtZWUxYi00YWY0LWE5YmMtOWNhYzI2NTliZjk4LWJsdWVtaXg6M2Q3ZjUzYTA2YjM0MmY2MjQwODI4ZjhlZWRmYTcwNDQ1YjBiN2NkMTAxMjZlOTEzY2FlNTA5NjU4MDA4YjRmMA=="
+        }
+      ]
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Valla, hoy no estás de humor "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#no",
+      "dialog_node": "node_8_1596176637276",
+      "previous_sibling": "node_1_1596176466286"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Se necesita ser optimista para lograr un objetivo. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "¿En qué te puedo ayudar?",
+            "options": [
+              {
+                "label": "Quiero hacer ejercicio",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Busco trabajo",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Quiero conocer gente",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#si",
+      "dialog_node": "node_1_1596176466286"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Estupendo. Hoy descubriremos tus habilidades. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "¿Cuál es tu máximo grado de estudios?",
+            "options": [
+              {
+                "label": "Primaria",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Secundaria",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Media superior",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              },
+              {
+                "label": "Superior",
+                "value": {
+                  "input": {
+                    "text": ""
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_1_1596176466286",
+      "conditions": "#work",
+      "dialog_node": "node_4_1596176583997"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Aloha soy Alan, Espero que estés muy bien. Pienso que todos los vientos son favorables, ¿piensas lo mismo?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "Sí",
+            "options": [],
+            "description": "No",
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "#welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
